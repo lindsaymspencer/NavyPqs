@@ -127,7 +127,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CwoPqs.cs" />
     <Compile Include="Models\Officer.cs" />
+    <Compile Include="Models\Section.cs" />
+    <Compile Include="Models\Signature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileHelper.cs" />
   </ItemGroup>
@@ -173,6 +176,9 @@
     <Content Include="Views\Officer\Details.cshtml" />
     <Content Include="Views\Officer\Edit.cshtml" />
     <Content Include="Views\Officer\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\ViewCwoPqs.cshtml" />
+    <Content Include="Views\Shared\Partials\ViewSection.cshtml" />
+    <Content Include="Views\Shared\Partials\ViewSignature.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,22 @@
+﻿@model NavyPqs.Models.CwoPqs
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>CwoPqs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach(var section in Model.Sections)
+        { 
+            Html.RenderPartial("Partials/ViewSection", section);
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

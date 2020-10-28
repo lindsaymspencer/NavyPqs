@@ -17,6 +17,10 @@ namespace NavyPqs.Models
 
         public string Rank { get; set; }
 
+        public CwoPqs TwoBravo { get; set; } = CwoPqs.NewTwoBravo();
+
+        public CwoPqs TwoAlpha { get; set; } = CwoPqs.NewTwoAlpha();
+
         public string ToJson() => JsonSerializer.Serialize(this);
     }
 }

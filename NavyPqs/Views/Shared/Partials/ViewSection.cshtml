@@ -1,0 +1,25 @@
+﻿@model NavyPqs.Models.Section
+
+<div>
+    <h4>Section</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        @foreach (var signature in Model.Signatures)
+        {
+            Html.RenderPartial("Partials/ViewSignature", signature);
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Number }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
