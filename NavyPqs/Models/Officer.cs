@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using NavyPqs.Services;
 
 namespace NavyPqs.Models
 {
@@ -22,5 +24,12 @@ namespace NavyPqs.Models
         public CwoPqs TwoAlpha { get; set; } = CwoPqs.NewTwoAlpha();
 
         public string ToJson() => JsonSerializer.Serialize(this);
+
+        public bool Export(string path)
+        {
+            FileHelper.WriteOver(Path.Combine(path, LastName + FirstName + ".cw2bpqs"),
+                ToJson());
+            return true;
+        }
     }
 }
