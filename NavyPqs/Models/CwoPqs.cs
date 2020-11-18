@@ -106,25 +106,34 @@ namespace NavyPqs.Models
 
         private static CwoPqs NewPqs(CwoPqs pqs, string[] a)
         {
+            AddSections(pqs, a);
+            return pqs;
+        }
+
+        private static void AddSections(CwoPqs pqs, string[] a)
+        {
+            int sectionCounter = 0;
             for (int j = 0; j < a.Count(); j++)
             {
                 var values = a[j].Split(';');
-                var signaturesBySection = new List<Signature>();
-                var signatureCount = values.Count() - 2;
-                for (int i = 0; i < signatureCount; i++)
-
-                {
-                    signaturesBySection.Add(new Signature { SomeKey = values[i + 2], SignedOff = false });
-                };
                 pqs.Sections.Add(new Section
                 {
                     Name = values[0],
-                    Number = values[1],
-                    Signatures = signaturesBySection
+                    Number = values[1]
                 });
-            }
+              
+                var signatureCount = values.Count() - 2;
+                pqs.Sections[sectionCounter].LineItem = new string[signatureCount];
+                pqs.Sections[sectionCounter].Signed = new bool[signatureCount];
 
-            return pqs;
+                for (int i = 0; i < signatureCount; i++)
+                {
+                    pqs.Sections[sectionCounter].LineItem[i] = values[i + 2];
+                    pqs.Sections[sectionCounter].Signed[i] = false;
+                }
+
+                sectionCounter++;
+            }
         }
 
         public string ToJson() => JsonSerializer.Serialize(this);
@@ -141,6 +150,21 @@ namespace NavyPqs.Models
                 return false;
             }
             return true;
+        }
+
+        public static CwoPqs CopyCwoPqs(CwoPqs toCopyTo, CwoPqs toCopyFrom)
+        {
+            if (toCopyFrom == null)
+            {
+                return toCopyTo;
+            }
+
+            for(int i = 0; i < toCopyTo.Sections.Count; i++)
+            {
+                toCopyTo.Sections[i] = Section.CopySection(toCopyTo.Sections[i], toCopyFrom.Sections[i]);
+            }
+
+            return toCopyTo;
         }
     }
 }

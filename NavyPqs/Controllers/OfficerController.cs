@@ -58,7 +58,9 @@ namespace NavyPqs.Controllers
             try
             {
                 int index = Officers.FindIndex(m => m.Id == id);
-                Officers[index] = officer;
+                Officer toUpdate = Officers.First(x => x.Id == index);
+                Officer merged = Officer.CopyOfficer(toUpdate, officer);
+                Officers[index] = merged;
 
                 return RedirectToAction("Index");
             }

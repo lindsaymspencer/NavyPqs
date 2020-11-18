@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
 using NavyPqs.Services;
 
 namespace NavyPqs.Models
@@ -30,6 +32,18 @@ namespace NavyPqs.Models
             FileHelper.WriteOver(Path.Combine(path, LastName + FirstName + ".cw2bpqs"),
                 ToJson());
             return true;
+        }
+
+        public static Officer CopyOfficer(Officer toCopyTo, Officer toCopyFrom)
+        {
+            toCopyTo.Id = toCopyFrom.Id;
+            toCopyTo.FirstName = toCopyFrom.FirstName ?? toCopyTo.FirstName;
+            toCopyTo.LastName = toCopyFrom.LastName ?? toCopyTo.LastName;
+            toCopyTo.Rank = toCopyFrom.Rank ?? toCopyTo.Rank;
+            toCopyTo.TwoAlpha = CwoPqs.CopyCwoPqs(toCopyTo.TwoAlpha, toCopyFrom.TwoAlpha);
+            toCopyTo.TwoBravo = CwoPqs.CopyCwoPqs(toCopyTo.TwoBravo, toCopyFrom.TwoBravo);
+
+            return toCopyTo;
         }
     }
 }
